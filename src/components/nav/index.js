@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { NavLink as RouterLink } from 'react-router-dom';
 import { 
   Collapse, 
   Navbar, 
@@ -8,7 +9,8 @@ import {
   NavItem, 
   NavLink 
 } from 'reactstrap';
-import { NavLink as RouterLink } from 'react-router-dom';
+
+import LoginMenu from './loginMenu'
 
 export default class extends Component {
   constructor(props) {
@@ -35,14 +37,7 @@ export default class extends Component {
               <NavLink tag={RouterLink} exact to="/">Home</NavLink>
             </NavItem>
           </Nav>
-           <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink tag={RouterLink} to="/login">Login</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={RouterLink} to="/register">Signup</NavLink>
-            </NavItem>
-          </Nav>
+          <LoginMenu />
         </Collapse>
       </Navbar>
     );

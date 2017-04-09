@@ -5,8 +5,10 @@ import { Button,
   Label, 
   Input 
 } from 'reactstrap';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import request from 'axios'
+
+import {checkAuth} from '../../utils/auth'
 
 export default class Login extends Component {
   onSubmit(e) {
@@ -23,6 +25,11 @@ export default class Login extends Component {
     })
   }
   render() {
+    if(checkAuth()) {
+      return (
+        <Redirect to="/"/>
+      )
+    }
     return(
       <div>
         <h1>Register now</h1>
