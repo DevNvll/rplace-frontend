@@ -9,8 +9,8 @@ export function login(email, password, captcha, onLogin, onError) {
   api.post('/login', {email: email, password: password, 'g-recaptcha-response': captcha})
   .then((body) => {
     localStorage.setItem('auth_token', body.data.access_token)
-    localStorage.setItem('profile', JSON.stringify({'username': email.split('@')[0], 'email': email}))
-    onLogin({'username': email.split('@')[0], 'email': email})
+    localStorage.setItem('profile', JSON.stringify({'username': body.data.username}))
+    onLogin({'username': body.data.username})
   }).catch((err) => {
     onError(err)
   })
