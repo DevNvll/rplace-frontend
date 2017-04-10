@@ -16,6 +16,17 @@ export function login(email, password, captcha, onLogin, onError) {
   })
 }
 
+export function register(username, email, password, onRegister, onError) {
+  api.post('/register', {username: username, email: email, password: password})
+  .then((body) => {
+    if(body.status === 200)
+      if(onRegister)
+        onRegister()
+  }).catch((err) => {
+    console.log(err)
+  })
+}
+
 export function checkAuth() {
   let authToken = localStorage.getItem('auth_token')
   let userProfile = localStorage.getItem('profile')
