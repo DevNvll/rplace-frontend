@@ -5,8 +5,8 @@ let api = axios.create({
   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 });
 
-export function login(email, password, onLogin, onError) {
-  api.post('/login', {email: email, password: password})
+export function login(email, password, captcha, onLogin, onError) {
+  api.post('/login', {email: email, password: password, 'g-recaptcha-response': captcha})
   .then((body) => {
     localStorage.setItem('auth_token', body.data.access_token)
     localStorage.setItem('profile', JSON.stringify({'username': email.split('@')[0], 'email': email}))

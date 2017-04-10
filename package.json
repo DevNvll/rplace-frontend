@@ -11,7 +11,9 @@
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.5.1",
     "react-addons-transition-group": "^15.5.1",
+    "react-async-script": "^0.8.0",
     "react-dom": "^15.4.2",
+    "react-google-recaptcha": "^0.8.1",
     "react-router-dom": "^4.0.0",
     "reactstrap": "^4.5.0"
   },
