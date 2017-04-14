@@ -8,7 +8,10 @@ let auth = axios.create({
 
 let api = axios.create({
   baseURL: `${API_URL}`,
-  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Authorization': `Bearer ${getToken()}`
+  }
 })
 
 //AUTH API
