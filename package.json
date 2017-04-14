@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "husky": "^0.13.3",
+    "lint-staged": "^3.4.0",
     "react-scripts": "0.9.5"
   },
   "dependencies": {
@@ -22,6 +24,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "precommit": "lint-staged",
     "eject": "react-scripts eject"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
