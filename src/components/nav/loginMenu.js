@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import { NavLink as RouterLink} from 'react-router-dom';
-import {  
-  Nav, 
-  NavItem, 
-  NavLink, 
-  Dropdown, 
-  DropdownMenu, 
+import React, { Component } from "react";
+import { NavLink as RouterLink } from "react-router-dom";
+import {
+  Nav,
+  NavItem,
+  NavLink,
+  Dropdown,
+  DropdownMenu,
   DropdownItem
-} from 'reactstrap';
+} from "reactstrap";
 
-import * as auth from '../../utils/auth'
+import * as auth from "../../utils/auth";
 
 export default class LoginButtons extends Component {
   constructor(props) {
@@ -26,10 +26,10 @@ export default class LoginButtons extends Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   }
-  
+
   render() {
-   if(auth.checkAuth()) {
-      let profile = auth.getProfile()
+    if (auth.checkAuth()) {
+      let profile = auth.getProfile();
       return (
         <Nav className="ml-auto" navbar>
           <NavItem>
@@ -44,23 +44,26 @@ export default class LoginButtons extends Component {
                 {profile.username}
               </NavLink>
               <DropdownMenu right>
+                <DropdownItem tag={RouterLink} to={"/u/" + profile.username}>
+                  Profile
+                </DropdownItem>
                 <DropdownItem onClick={auth.logout}>Logout</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </NavItem>
         </Nav>
-      )
+      );
     } else {
-        return (
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink tag={RouterLink} to="/login">Login</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={RouterLink} to="/register">Sign Up</NavLink>
-            </NavItem>
-          </Nav>
-      )
+      return (
+        <Nav className="ml-auto" navbar>
+          <NavItem>
+            <NavLink tag={RouterLink} to="/login">Login</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink tag={RouterLink} to="/register">Sign Up</NavLink>
+          </NavItem>
+        </Nav>
+      );
     }
   }
 }

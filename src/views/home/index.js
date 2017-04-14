@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Board from '../../components/board';
+import Board from "../../components/board";
 
 export default class Home extends Component {
   render() {

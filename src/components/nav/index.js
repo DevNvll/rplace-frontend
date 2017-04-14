@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
-import { NavLink as RouterLink } from 'react-router-dom';
-import { 
-  Collapse, 
-  Navbar, 
-  NavbarToggler, 
-  NavbarBrand, 
-  Nav, 
-  NavItem, 
-  NavLink 
-} from 'reactstrap';
+import React, { Component } from "react";
+import { NavLink as RouterLink } from "react-router-dom";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink
+} from "reactstrap";
 
-import LoginMenu from './loginMenu'
+import LoginMenu from "./loginMenu";
 
 export default class extends Component {
   constructor(props) {

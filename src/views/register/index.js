@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-import RegisterForm from './registerForm'
+import RegisterForm from "./registerForm";
 
 const RegisterPage = () => (
   <div>
@@ -9,4 +9,4 @@ const RegisterPage = () => (
   </div>
 );
 
-export default RegisterPage
+export default RegisterPage;
