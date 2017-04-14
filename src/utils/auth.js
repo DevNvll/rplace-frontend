@@ -1,36 +1,51 @@
 import axios from 'axios'
+import {API_URL, AUTH_URL} from '../config'
+
+let auth = axios.create({
+  baseURL: `${AUTH_URL}`,
+  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+})
 
 let api = axios.create({
-  baseURL: 'http://localhost:5000/',
+  baseURL: `${API_URL}`,
   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-});
+})
+
+//AUTH API
 
 export function login(email, password, captcha, onLogin, onError) {
-  api.post('/login', {email: email, password: password, 'g-recaptcha-response': captcha})
+  auth.post('/login', {email: email, password: password, 'g-recaptcha-response': captcha})
   .then((body) => {
     localStorage.setItem('auth_token', body.data.access_token)
     localStorage.setItem('profile', JSON.stringify({'username': body.data.username}))
     onLogin({'username': body.data.username})
   }).catch((err) => {
-    onError(err)
+    if(onError)
+      onError(err.response.data.error.status_code)
   })
 }
 
 export function register(username, email, password, onRegister, onError) {
-  api.post('/register', {username: username, email: email, password: password})
+  auth.post('/register', {username: username, email: email, password: password})
   .then((body) => {
     if(body.status === 200)
       if(onRegister)
         onRegister()
   }).catch((err) => {
-    console.log(err)
+    if(onError)
+      onError(err.response.data.error.status_code)
   })
+}
+
+export async function getInfo(username) {
+  const {data} = await api.get('/user/' + username)
+  return data
 }
 
 export function checkAuth() {
   let authToken = localStorage.getItem('auth_token')
   let userProfile = localStorage.getItem('profile')
-  return authToken && userProfile ? true : false;
+  return authToken && userProfile ? true : false
 }
 
 export function getToken() {
