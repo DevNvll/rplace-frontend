@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import { Link, Redirect } from "react-router-dom";
 import Recaptcha from "react-google-recaptcha";
+import { ModalFooter } from "reactstrap";
 
 import { login, checkAuth } from "../../utils/auth";
 import STATUS_CODES from "../../utils/statusCodes";
@@ -14,6 +15,11 @@ export default class LoginForm extends Component {
       errorVisible: false,
       recaptcha: null
     };
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onLogin = this.onLogin.bind(this);
+    this.onLoginError = this.onLoginError.bind(this);
+    this.onDismiss = this.onDismiss.bind(this);
+    this.onCaptcha = this.onCaptcha.bind(this);
   }
   onDismiss() {
     this.setState({ errorVisible: false });
@@ -23,6 +29,7 @@ export default class LoginForm extends Component {
   }
   onLogin(credentials) {
     this.forceUpdate();
+    this.props.toggleLogin();
   }
   onLoginError(err) {
     this.setState({ errorVisible: true, errcode: STATUS_CODES[err] });
@@ -33,8 +40,8 @@ export default class LoginForm extends Component {
       e.target.email.value,
       e.target.password.value,
       this.state.recaptcha,
-      this.onLogin.bind(this),
-      this.onLoginError.bind(this)
+      this.onLogin,
+      this.onLoginError
     );
   }
   render() {
@@ -43,11 +50,11 @@ export default class LoginForm extends Component {
     }
     return (
       <div>
-        <Form onSubmit={this.onSubmit.bind(this)}>
+        <Form onSubmit={this.onSubmit}>
           <Alert
             color="danger"
             isOpen={this.state.errorVisible}
-            toggle={this.onDismiss.bind(this)}
+            toggle={this.onDismiss}
           >
             {this.state.errcode}
           </Alert>
@@ -72,11 +79,12 @@ export default class LoginForm extends Component {
           <Recaptcha
             ref="recaptcha"
             sitekey={CAPTCHA_SITE_KEY}
-            onChange={this.onCaptcha.bind(this)}
+            onChange={this.onCaptcha}
           />
-          <Button color="primary">Login</Button>
-          {" "}
-          <Link to="/register">Create an account</Link>
+          <br />
+          <ModalFooter>
+            <Button color="primary">Login</Button>
+          </ModalFooter>
         </Form>
       </div>
     );

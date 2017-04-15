@@ -57,10 +57,12 @@ export default class LoginButtons extends Component {
       return (
         <Nav className="ml-auto" navbar>
           <NavItem>
-            <NavLink tag={RouterLink} to="/login">Login</NavLink>
+            <NavLink onClick={this.props.toggleLogin} href="#">Login</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink tag={RouterLink} to="/register">Sign Up</NavLink>
+            <NavLink onClick={this.props.toggleRegister} href="#">
+              Register
+            </NavLink>
           </NavItem>
         </Nav>
       );

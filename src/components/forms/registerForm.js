@@ -7,11 +7,10 @@ import {
   AvGroup as FormGroup,
   AvFeedback
 } from "availity-reactstrap-validation";
+import { ModalFooter } from "reactstrap";
 
 import { checkAuth, register } from "../../utils/auth";
 import STATUS_CODES from "../../utils/statusCodes";
-
-import Success from "./successMessage";
 
 export default class RegisterForm extends Component {
   constructor(props) {
@@ -20,6 +19,11 @@ export default class RegisterForm extends Component {
       registered: false,
       errorVisible: false
     };
+    this.gotoLogin = this.gotoLogin.bind(this);
+    this.onDismiss = this.onDismiss.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onRegister = this.onRegister.bind(this);
+    this.onError = this.onError.bind(this);
   }
   onDismiss() {
     this.setState({ errorVisible: false });
@@ -30,29 +34,35 @@ export default class RegisterForm extends Component {
   onError(err) {
     this.setState({ errorVisible: true, errcode: STATUS_CODES[err] });
   }
+  gotoLogin() {
+    this.props.toggleLogin();
+    this.props.toggleRegister();
+  }
   onSubmit(e, values) {
     register(
       values.username,
       values.email,
       values.password,
-      this.onRegister.bind(this),
-      this.onError.bind(this)
+      this.onRegister,
+      this.onError
     );
   }
   render() {
-    if (checkAuth()) {
-      return <Redirect to="/" />;
-    }
     if (this.state.registered) {
-      return <Success />;
+      return (
+        <div>
+          <h1>Sucessfully registered!</h1>
+          <a href="#" onClick={this.gotoLogin}>Click here to login</a>
+        </div>
+      );
     }
     return (
       <div>
-        <Form onValidSubmit={this.onSubmit.bind(this)}>
+        <Form onValidSubmit={this.onSubmit}>
           <Alert
             color="danger"
             isOpen={this.state.errorVisible}
-            toggle={this.onDismiss.bind(this)}
+            toggle={this.onDismiss}
           >
             {this.state.errcode}
           </Alert>
@@ -102,9 +112,9 @@ export default class RegisterForm extends Component {
             />
             <AvFeedback>Passwords must match</AvFeedback>
           </FormGroup>
-          <Button color="primary">Register</Button>
-          {" "}
-          <Link to="/login">Login to your account</Link>
+          <ModalFooter>
+            <Button color="primary">Register</Button>
+          </ModalFooter>
         </Form>
       </div>
     );
