@@ -7,8 +7,6 @@ import LoginModal from "./components/loginModal";
 import RegisterModal from "./components/registerModal";
 
 import Home from "./views/home";
-import Login from "./views/login";
-import Register from "./views/register";
 import Profile from "./views/profile";
 
 class App extends Component {
@@ -46,8 +44,6 @@ class App extends Component {
           />
           <Container>
             <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
             <Route path="/u/:username" component={Profile} />
           </Container>
         </div>
