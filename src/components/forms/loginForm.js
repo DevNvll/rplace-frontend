@@ -28,7 +28,6 @@ export default class LoginForm extends Component {
     this.setState({ recaptcha: code });
   }
   onLogin(credentials) {
-    this.forceUpdate();
     this.props.toggleLogin();
   }
   onLoginError(err) {
@@ -45,9 +44,6 @@ export default class LoginForm extends Component {
     );
   }
   render() {
-    if (checkAuth()) {
-      return <Redirect to="/" />;
-    }
     return (
       <div>
         <Form onSubmit={this.onSubmit}>
