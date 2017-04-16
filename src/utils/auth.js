@@ -1,17 +1,9 @@
 import axios from "axios";
-import { API_URL, AUTH_URL } from "../config";
+import { AUTH_URL } from "../config";
 
 let auth = axios.create({
   baseURL: `${AUTH_URL}`,
   headers: { "Content-Type": "application/x-www-form-urlencoded" }
-});
-
-let api = axios.create({
-  baseURL: `${API_URL}`,
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-    Authorization: `Bearer ${getToken()}`
-  }
 });
 
 function parseJwt(token) {
@@ -58,11 +50,6 @@ export function register(username, email, password, onRegister, onError) {
     .catch(err => {
       if (onError) onError(err.response.data.error.status_code);
     });
-}
-
-export async function getInfo(username) {
-  const { data } = await api.get("/user/" + username);
-  return data;
 }
 
 export function checkAuth() {

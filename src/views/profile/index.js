@@ -1,47 +1,49 @@
 import React, { Component } from "react";
-import { Row, Col } from "reactstrap";
+import { Container } from "reactstrap";
 
-import { getInfo } from "../../utils/auth";
+import { getInfo } from "../../utils/api";
+import { getColorById } from "../../utils/colors";
+
+import ProfileHeader from "./header";
+import History from "./history";
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      last_color: "A"
+    };
   }
   componentWillMount() {
+    document.title =
+      this.props.match.params.username + "'s Profile | RPlace.io";
     getInfo(this.props.match.params.username)
       .then(data => {
-        this.setState(data);
+        this.setState({
+          ...data,
+          last_color: data.last_color ? getColorById(data.last_color).hash : "A"
+        });
       })
-      .catch(err => {});
+      .catch(err => {
+        console.log(err);
+        if (
+          err.response &&
+          err.response.data.error.status_code === "not_found_user_username"
+        )
+          this.setState({ notFound: true });
+      });
   }
   render() {
-    const username = this.props.match.params.username;
+    if (this.state.notFound)
+      return (
+        <Container>
+          <h1>User "{this.props.match.params.username}" not found</h1>
+        </Container>
+      );
     return (
       <div>
-        <center>
-          <h1>{username}</h1>
-          <Row>
-            <Col xs="6"><h5>{this.state.total_changed} blocks placed</h5></Col>
-            <Col xs="6">
-              {
-                new Date(1000 * this.state.last_time)
-                  .toLocaleString()
-                  .split(" ")[0]
-              }
-              {" "}
-              <b>X: </b>
-              {" "}
-              {this.state.last_x}
-              {" "}
-              <b>Y: </b>
-              {" "}
-              {this.state.last_y}
-              {" "}
-              <i style={{ color: "#DDE5BA", border: "2x solid black" }}>•</i>
-            </Col>
-          </Row>
-        </center>
+        <ProfileHeader data={this.state} />
+        <History user={this.props.match.params.username} />
       </div>
     );
   }
