@@ -14,6 +14,12 @@ let api = axios.create({
   }
 });
 
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace("-", "+").replace("_", "/");
+  return JSON.parse(window.atob(base64));
+}
+
 //AUTH API
 
 export function login(email, password, captcha, onLogin, onError) {
@@ -62,7 +68,9 @@ export async function getInfo(username) {
 export function checkAuth() {
   let authToken = localStorage.getItem("auth_token");
   let userProfile = localStorage.getItem("profile");
-  return authToken && userProfile ? true : false;
+  return (
+    authToken && userProfile && parseJwt(authToken).exp < new Date().getTime()
+  );
 }
 
 export function getToken() {
