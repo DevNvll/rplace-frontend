@@ -40,7 +40,14 @@ export function register(username, email, password, onRegister, onError) {
   auth
     .post("/register", { username: username, email: email, password: password })
     .then(body => {
-      if (body.status === 200) if (onRegister) onRegister();
+      if (body.status === 200) {
+        localStorage.setItem("auth_token", body.data.access_token);
+        localStorage.setItem(
+          "profile",
+          JSON.stringify({ username: body.data.username })
+        );
+        if (onRegister) onRegister({ username: body.data.username });
+      }
     })
     .catch(err => {
       if (onError) onError(err.response.data.error.status_code);

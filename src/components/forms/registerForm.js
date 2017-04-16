@@ -29,14 +29,11 @@ export default class RegisterForm extends Component {
     this.setState({ errorVisible: false });
   }
   onRegister() {
-    this.setState({ registered: true });
+    this.forceUpdate();
+    this.props.toggleRegister();
   }
   onError(err) {
     this.setState({ errorVisible: true, errcode: STATUS_CODES[err] });
-  }
-  gotoLogin() {
-    this.props.toggleLogin();
-    this.props.toggleRegister();
   }
   onSubmit(e, values) {
     register(
@@ -48,14 +45,6 @@ export default class RegisterForm extends Component {
     );
   }
   render() {
-    if (this.state.registered) {
-      return (
-        <div>
-          <h1>Sucessfully registered!</h1>
-          <a href="#" onClick={this.gotoLogin}>Click here to login</a>
-        </div>
-      );
-    }
     return (
       <div>
         <Form onValidSubmit={this.onSubmit}>
