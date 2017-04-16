@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Navbar from "./components/nav";
@@ -42,10 +41,8 @@ class App extends Component {
             toggleRegister={this.toggleRegister}
             toggleLogin={this.toggleLogin}
           />
-          <Container>
-            <Route exact path="/" component={Home} />
-            <Route path="/u/:username" component={Profile} />
-          </Container>
+          <Route exact path="/" component={Home} />
+          <Route path="/u/:username" component={Profile} />
         </div>
       </Router>
     );

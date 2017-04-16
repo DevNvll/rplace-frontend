@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button, Label, Alert } from "reactstrap";
-import { Link, Redirect } from "react-router-dom";
 import {
   AvForm as Form,
   AvField as Input,
@@ -9,7 +8,7 @@ import {
 } from "availity-reactstrap-validation";
 import { ModalFooter } from "reactstrap";
 
-import { checkAuth, register } from "../../utils/auth";
+import { register } from "../../utils/auth";
 import STATUS_CODES from "../../utils/statusCodes";
 
 export default class RegisterForm extends Component {
@@ -19,7 +18,6 @@ export default class RegisterForm extends Component {
       registered: false,
       errorVisible: false
     };
-    this.gotoLogin = this.gotoLogin.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onRegister = this.onRegister.bind(this);
