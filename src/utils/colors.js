@@ -1,3 +1,5 @@
+import max from "lodash/max";
+
 export const colors = [
   { value: 0x001f3f, hash: "#001f3f", name: "NAVY", id: "A" },
   { value: 0x0074d9, hash: "#0074d9", name: "BLUE", id: "B" },
@@ -20,5 +22,11 @@ export const colors = [
 export function getColorById(id) {
   return colors.find(color => {
     return color.id === id;
+  });
+}
+
+export function getFavoriteColor(object) {
+  return max(Object.keys(object), function(o) {
+    return object[o];
   });
 }

@@ -4,8 +4,8 @@ import { Container } from "reactstrap";
 import { getInfo } from "../../utils/api";
 import { getColorById } from "../../utils/colors";
 
-import ProfileHeader from "./header";
-import History from "./history";
+import ProfileHeader from "./Header";
+import History from "./HistoryTable";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -14,24 +14,14 @@ export default class Profile extends Component {
       last_color: "A"
     };
   }
-  componentWillMount() {
+  async componentWillMount() {
     document.title =
       this.props.match.params.username + "'s Profile | RPlace.io";
-    getInfo(this.props.match.params.username)
-      .then(data => {
-        this.setState({
-          ...data,
-          last_color: data.last_color ? getColorById(data.last_color).hash : "A"
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        if (
-          err.response &&
-          err.response.data.error.status_code === "not_found_user_username"
-        )
-          this.setState({ notFound: true });
-      });
+    let data = await getInfo(this.props.match.params.username);
+    this.setState({
+      ...data,
+      last_color: data.last_color ? getColorById(data.last_color).hash : "A"
+    });
   }
   render() {
     if (this.state.notFound)

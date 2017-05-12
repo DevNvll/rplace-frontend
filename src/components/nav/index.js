@@ -10,7 +10,7 @@ import {
   NavLink
 } from "reactstrap";
 
-import LoginMenu from "./loginMenu";
+import LoginMenu from "./LoginMenu";
 
 export default class extends Component {
   constructor(props) {
@@ -34,6 +34,11 @@ export default class extends Component {
           <Nav className="pull-xs-right" navbar>
             <NavItem>
               <NavLink tag={RouterLink} exact to="/">Home</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={RouterLink} exact to="/leaderboards">
+                Leaderboards
+              </NavLink>
             </NavItem>
           </Nav>
           <LoginMenu

@@ -13,12 +13,13 @@ let api = axios.create({
 // RPLACE API
 
 export async function getInfo(username) {
-  const { data } = await api.get("/user/" + username);
+  const { data } = await api.get("/users/" + username);
   return data;
 }
 
-export function getUserHistory(username) {
-  return api.get("/history/user/" + username);
+export async function getUserHistory(username) {
+  let { data } = await api.get("/history/users/" + username);
+  return data;
 }
 
 export function placeBlock(x, y, color) {
@@ -29,22 +30,30 @@ export function placeBlock(x, y, color) {
   });
 }
 
-export function getBlock(x, y) {
-  return api.get("/block", {
+export async function getBlock(x, y) {
+  let { data } = await api.get("/block", {
     x: x,
     y: y
   });
+  return data;
 }
 
-export function getBoard() {
-  return api.get("/board");
+export async function getBoard() {
+  let { data } = await api.get("/board");
+  return data;
 }
 
-export function getBlockHistory(x, y, start, limit) {
-  return api.get("/history/block", {
+export async function getBlockHistory(x, y, start, limit) {
+  let { data } = await api.get("/history/block", {
     x: x,
     y: y,
     start: start,
     limit: limit
   });
+  return data;
+}
+
+export async function getLeaderboard(section) {
+  let { data } = await api.get("/leaderboards/" + section);
+  return data;
 }

@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Navbar from "./components/nav";
-import LoginModal from "./components/loginModal";
-import RegisterModal from "./components/registerModal";
+import LoginModal from "./components/LoginModal";
+import RegisterModal from "./components/RegisterModal";
 
 import Home from "./views/home";
 import Profile from "./views/profile";
+import Leaderboards from "./views/leaderboards";
+
+import { checkToken, logout } from "./utils/auth";
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +26,11 @@ class App extends Component {
   }
   toggleRegister() {
     this.setState({ registerModal: !this.state.registerModal });
+  }
+  componentWillMount() {
+    if (!checkToken()) {
+      logout();
+    }
   }
   render() {
     return (
@@ -43,6 +51,7 @@ class App extends Component {
           />
           <Route exact path="/" component={Home} />
           <Route path="/u/:username" component={Profile} />
+          <Route path="/leaderboards" component={Leaderboards} />
         </div>
       </Router>
     );

@@ -60,6 +60,10 @@ export function checkAuth() {
   );
 }
 
+export function checkToken() {
+  return parseJwt(getToken()).exp < new Date().getTime();
+}
+
 export function getToken() {
   return localStorage.getItem("auth_token");
 }

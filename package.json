@@ -12,14 +12,19 @@
     "availity-reactstrap-validation": "^1.4.1",
     "axios": "^0.16.0",
     "bootstrap": "4.0.0-alpha.6",
+    "classnames": "^2.2.5",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.5.1",
     "react-addons-transition-group": "^15.5.1",
     "react-async-script": "^0.8.0",
+    "react-bootstrap": "^0.31.0",
     "react-dom": "^15.4.2",
     "react-google-recaptcha": "^0.8.1",
     "react-router-dom": "^4.0.0",
-    "reactstrap": "^4.5.0"
+    "reactstrap": "^4.5.0",
+    "segmentize": "^0.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
