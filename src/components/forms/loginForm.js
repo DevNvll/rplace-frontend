@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
-import { Redirect } from "react-router-dom";
 import Recaptcha from "react-google-recaptcha";
 import { ModalFooter } from "reactstrap";
 
-import { login, checkAuth } from "../../utils/auth";
+import { login } from "../../utils/auth";
 import STATUS_CODES from "../../utils/statusCodes";
 import { CAPTCHA_SITE_KEY } from "../../config";
 

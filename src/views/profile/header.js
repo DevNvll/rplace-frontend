@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Jumbotron, Container } from "reactstrap";
+import moment from "moment";
 
 export default class ProfileHeader extends Component {
   render() {
@@ -20,7 +21,11 @@ export default class ProfileHeader extends Component {
                 <h1 style={{ fontWeight: "bold" }}>
                   {this.props.data.username}
                 </h1>
-                placing since 17/08/59
+                placing since
+                {" "}
+                {moment(this.props.data.date_joined * 1000).format(
+                  "MMMM Do YYYY"
+                )}
               </Col>
               <Col xs="3">
                 <ul className="list-inline" style={{ textAlign: "center" }}>

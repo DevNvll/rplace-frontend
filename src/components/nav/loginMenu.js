@@ -44,7 +44,11 @@ export default class LoginButtons extends Component {
                 {profile.username}
               </NavLink>
               <DropdownMenu right>
-                <DropdownItem tag={RouterLink} to={"/u/" + profile.username}>
+                <DropdownItem
+                  tag={RouterLink}
+                  to={"/u/" + profile.username}
+                  exact
+                >
                   Profile
                 </DropdownItem>
                 <DropdownItem onClick={auth.logout}>Logout</DropdownItem>
