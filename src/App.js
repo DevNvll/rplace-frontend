@@ -9,7 +9,7 @@ import Home from "./views/home";
 import Profile from "./views/profile";
 import Leaderboards from "./views/leaderboards";
 
-import { checkToken, logout } from "./utils/auth";
+import { refreshToken } from "./utils/auth";
 
 class App extends Component {
   constructor(props) {
@@ -28,9 +28,7 @@ class App extends Component {
     this.setState({ registerModal: !this.state.registerModal });
   }
   componentWillMount() {
-    if (!checkToken()) {
-      logout();
-    }
+    refreshToken();
   }
   render() {
     return (

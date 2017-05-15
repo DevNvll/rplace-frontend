@@ -22,10 +22,12 @@ export function login(email, password, captcha, onLogin, onError) {
       "g-recaptcha-response": captcha
     })
     .then(body => {
+      console.log(body.data);
       localStorage.setItem("auth_token", body.data.access_token);
+      localStorage.setItem("refresh_token", body.data.refresh_token);
       localStorage.setItem(
         "profile",
-        JSON.stringify({ username: body.data.username })
+        JSON.stringify({ username: body.data.username, admin: body.data.ia })
       );
       onLogin({ username: body.data.username });
     })
@@ -52,16 +54,35 @@ export function register(username, email, password, onRegister, onError) {
     });
 }
 
+export function refreshToken() {
+  axios({
+    method: "POST",
+    url: `${AUTH_URL}/refresh`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("refresh_token")}`
+    }
+  }).then(({ data }) => {
+    setToken(data.access_token);
+  });
+}
+
+export function setToken(token) {
+  localStorage.setItem("auth_token", token);
+}
+
 export function checkAuth() {
   let authToken = localStorage.getItem("auth_token");
   let userProfile = localStorage.getItem("profile");
   return (
-    authToken && userProfile && parseJwt(authToken).exp < new Date().getTime()
+    authToken &&
+    userProfile &&
+    parseJwt(authToken).exp * 1000 > new Date().getTime()
   );
 }
 
 export function checkToken() {
-  return parseJwt(getToken()).exp < new Date().getTime();
+  if (getToken()) return parseJwt(getToken()).exp * 1000 > new Date().getTime();
+  else return false;
 }
 
 export function getToken() {
@@ -74,5 +95,6 @@ export function getProfile() {
 
 export function logout() {
   localStorage.removeItem("auth_token");
+  localStorage.removeItem("refresh_token");
   localStorage.removeItem("profile");
 }
