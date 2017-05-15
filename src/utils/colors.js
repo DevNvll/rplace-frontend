@@ -16,7 +16,8 @@ export const colors = [
   { value: 0x111111, hash: "#111111", name: "BLACK", id: "M" },
   { value: 0xaaaaaa, hash: "#aaaaaa", name: "GRAY", id: "N" },
   { value: 0xdddddd, hash: "#dddddd", name: "SILVER", id: "O" },
-  { value: 0xf2f2f2, hash: "#f2f2f2", name: "UNCLAIMED", id: "P" }
+  { value: 0xffffff, hash: "#ffffff", name: "WHITE", id: "P" },
+  { value: 0xc5bbaf, hash: "#C5BBAF", name: "UNCLAIMED", id: "Q" }
 ];
 
 export function getColorById(id) {
