@@ -22,7 +22,6 @@ export function login(email, password, captcha, onLogin, onError) {
       "g-recaptcha-response": captcha
     })
     .then(body => {
-      console.log(body.data);
       localStorage.setItem("auth_token", body.data.access_token);
       localStorage.setItem("refresh_token", body.data.refresh_token);
       localStorage.setItem(
