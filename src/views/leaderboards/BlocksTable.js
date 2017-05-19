@@ -33,21 +33,19 @@ export default class LeaderboardTable extends Component {
                 this.props.rankData.map((block, i) => {
                   return (
                     <tr key={i}>
-                      <td>
-                        <center>({block.color.x}, {block.color.y})</center>
+                      <td style="text-align: center;">
+                        ({block.color.x}, {block.color.y})
                       </td>
-                      <td>
-                        <center>
-                          {" "}<i
-                            className="fa fa-square"
-                            style={{
-                              color: getColorById(block.color).hash
-                            }}
-                          />
-                        </center>
+                      <td style="text-align: center;">
+                        {" "}<i
+                          className="fa fa-square"
+                          style={{
+                            color: getColorById(block.color).hash
+                          }}
+                        />
                       </td>
-                      <td><center>{block.times_changed}</center></td>
-                      <td><center>{block.username}</center></td>
+                      <td style="text-align: center;">{block.times_changed}</td>
+                      <td style="text-align: center;">{block.username}</td>
                       <td>
                         {moment(block.date_modified * 1000).format(
                           "MMMM Do YYYY [@] h:mm:ss a"

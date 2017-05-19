@@ -54,12 +54,12 @@ export default class LoginForm extends Component {
             {this.state.errcode}
           </Alert>
           <FormGroup>
-            <Label for="email">E-mail</Label>
+            <Label for="email">Username or Email</Label>
             <Input
               type="text"
               name="email"
               id="email"
-              placeholder="your email"
+              placeholder="username or email"
             />
           </FormGroup>
           <FormGroup>
@@ -68,7 +68,7 @@ export default class LoginForm extends Component {
               type="password"
               name="password"
               id="password"
-              placeholder="your password"
+              placeholder="password"
             />
           </FormGroup>
           <Recaptcha
